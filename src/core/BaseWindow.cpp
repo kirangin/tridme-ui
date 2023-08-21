@@ -91,7 +91,8 @@ void BaseWindow::renderWidgets() {
       }
 
       ImGui::Begin("MainWindow", &m_windowOpened);
-      m_layout->render();
+      if (m_layout != nullptr)
+        m_layout->render();
       ImGui::End();
 
     ImGui::End();
