@@ -16,6 +16,8 @@ add_library(
   components/Layout.cpp
   components/HBoxLayout.cpp
   components/VBoxLayout.cpp
+  components/MenuBar.cpp
+  components/Menu.cpp
 )
 
 target_include_directories(

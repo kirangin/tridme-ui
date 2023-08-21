@@ -12,6 +12,7 @@
 #include <etc/FontAwesome.hpp>
 #include <misc/cpp/imgui_stdlib.h>
 #include <components/Layout.hpp>
+#include <components/MenuBar.hpp>
 using namespace Tridme;
 using namespace Tridme::UI;
 
@@ -35,6 +36,7 @@ namespace Tridme {
       void theme();
       void setEnableDockspace(bool enable);
       void addComponent(Object* obj);
+      void setMenuBar(MenuBar* menuBar);
       void setLayout(Layout* layout);
 
     private:
@@ -47,6 +49,7 @@ namespace Tridme {
       bool m_dockspaceEnabled = false;
       bool m_windowOpened = true;
       std::unordered_map<std::string, Storage::Vector<std::string>> m_componentIds;
+      MenuBar* m_menuBar = nullptr;
 
       /* ImGui dan Dockingnya */
       bool m_optFullscreen = true;
