@@ -16,7 +16,9 @@ Button::~Button() {
 
 void Button::render() {
   if (m_isVisible) {
-    if (ImGui::Button(this->m_label.c_str())) {
+    float width = ImGui::GetContentRegionAvail().x;
+
+    if (ImGui::Button(this->m_label.c_str(), ImVec2(width, 0))) {
       onClick.emit();
     }
   }
