@@ -17,6 +17,7 @@ namespace Tridme {
         ~HBoxLayout();
 
         void addComponent(Object* obj);
+        void addLayout(Layout* layout);
         void removeComponent(Object* obj);
         void render();
         void setId(std::string id);

@@ -29,6 +29,11 @@ void HBoxLayout::addComponent(Object* obj) {
   m_totalChild += 1;
 }
 
+void HBoxLayout::addLayout(Layout* layout) {
+  this->m_layouts.pushBack(layout);
+  m_totalChild += 1;
+}
+
 void HBoxLayout::removeComponent(Object* obj) {
   
 }
@@ -61,15 +66,24 @@ void HBoxLayout::render() {
     ImGui::EndTable();
   }
 
-  // if (ImGui::BeginTable("tableLayouts", this->m_totalChild)) {
-  //   ImGui::TableNextRow();
-  //   for (auto& layout : this->m_layouts) {
-  //     ImGui::TableNextColumn();
-  //     layout->render();
-  //   }
+  firstColumn = true;
 
-  //   ImGui::EndTable();
-  // }
+  if (this->m_layouts.getSize() > 0) {
+    ImGui::SetCursorPosY(ImGui::GetCursorPosY() - 16.0f);
+
+    if (ImGui::BeginTable("tableLayouts", this->m_layouts.getSize())) {
+      ImGui::TableNextRow();
+      
+      for (auto& layout : this->m_layouts) {
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(width);
+
+        layout->render();
+      }
+
+      ImGui::EndTable();
+    }
+  }
 }
 
 void HBoxLayout::setId(std::string id) {
