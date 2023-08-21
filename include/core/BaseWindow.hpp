@@ -37,8 +37,6 @@ namespace Tridme {
       void addComponent(Object* obj);
       void setLayout(Layout* layout);
 
-      std::unordered_map<std::string, Storage::Vector<std::string>> m_componentIds;
-
     private:
       std::string m_title;
       int         m_width;
@@ -48,6 +46,7 @@ namespace Tridme {
 
       bool m_dockspaceEnabled = false;
       bool m_windowOpened = true;
+      std::unordered_map<std::string, Storage::Vector<std::string>> m_componentIds;
 
       /* ImGui dan Dockingnya */
       bool m_optFullscreen = true;
