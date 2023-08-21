@@ -26,23 +26,25 @@ void MainWindow::onInit() {
   m_reason = new TextEdit("Reason");
   m_reason->setPlaceholderText("Reason for joining");
 
-  HBoxLayout* hboxRow1 = new HBoxLayout();
-  // HBoxLayout* hboxRow2 = new HBoxLayout();
-  // VBoxLayout* vbox = new VBoxLayout();
+  m_buttonPlay = new Button("Play");
 
-  // addComponent(m_username);
-  // addComponent(m_password);
-  // addComponent(m_reason);
+  HBoxLayout* hboxRow1 = new HBoxLayout();
+  HBoxLayout* hboxRow2 = new HBoxLayout();
+  HBoxLayout* hboxRow3 = new HBoxLayout();
+  VBoxLayout* vbox = new VBoxLayout();
+
   hboxRow1->addComponent(m_username);
   hboxRow1->addComponent(m_password);
-  // hboxRow2->addComponent(m_reason);
+  hboxRow2->addComponent(m_reason);
+  hboxRow3->addComponent(m_buttonPlay);
 
-  // vbox->addLayout(hboxRow1);
-  // vbox->addLayout(hboxRow2);
+  vbox->addLayout(hboxRow1);
+  vbox->addLayout(hboxRow2);
+  vbox->addLayout(hboxRow3);
 
   // m_username->onEnterPressed.connect([this] { onUsernameEntered(); });
   // m_password->onEnterPressed.connect([this] { onPasswordEntered(); });
-  setLayout(hboxRow1);
+  setLayout(vbox);
 }
 
 void MainWindow::onUpdate(float dt) {
