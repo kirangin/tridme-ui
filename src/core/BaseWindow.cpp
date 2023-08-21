@@ -84,7 +84,6 @@ void BaseWindow::renderWidgets() {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
     ImGui::Begin("DockSpace Demo", &m_optFullscreen, m_windowFlags);
     ImGui::PopStyleVar();
-
       if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable) {
         ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
         ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), m_dockspaceFlags);
@@ -94,6 +93,10 @@ void BaseWindow::renderWidgets() {
       if (m_layout != nullptr)
         m_layout->render();
       ImGui::End();
+
+      if (m_menuBar != nullptr) {
+        m_menuBar->render();
+      }
 
     ImGui::End();
   } else {
@@ -243,4 +246,8 @@ void BaseWindow::setEnableDockspace(bool value) {
 
 void BaseWindow::setLayout(Layout* layout) { 
   this->m_layout = layout;
+}
+
+void BaseWindow::setMenuBar(MenuBar* menuBar) {
+  this->m_menuBar = menuBar;
 }
