@@ -8,6 +8,7 @@
 #include <components/TextEdit.hpp>
 #include <components/HBoxLayout.hpp>
 #include <components/VBoxLayout.hpp>
+#include <components/MenuBar.hpp>
 using namespace Tridme;
 using namespace Tridme::UI;
 
@@ -41,6 +42,7 @@ class MainWindow : public BaseWindow {
     LineEdit* m_username;
     LineEdit* m_password;
     TextEdit* m_reason;
+    MenuBar*  m_menuBar;
 };
 
 #endif
