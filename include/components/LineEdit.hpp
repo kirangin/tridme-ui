@@ -44,12 +44,12 @@ namespace Tridme {
         int                 m_maxLength;
         bool                m_readOnly;
         bool                m_hideCharacter;
-        std::string         m_name;
         std::string         m_text;
         std::string         m_placeholderText;
         std::string         m_id;
+        std::string         m_name;
+        std::string         m_type = "LineEdit";
         ImGuiInputTextFlags m_flags = ImGuiInputTextFlags_None | ImGuiInputTextFlags_EnterReturnsTrue;
-        std::string   m_type = "LineEdit";
     };
   }
 }

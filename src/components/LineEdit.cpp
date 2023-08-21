@@ -11,6 +11,7 @@ LineEdit::LineEdit(std::string name) {
 }
 
 LineEdit::LineEdit(std::string name, std::string content) {
+  this->m_name = name;
   this->m_text = content;
 }
 
@@ -68,7 +69,7 @@ std::string LineEdit::getText() const {
 void LineEdit::render() {
   if (this->m_isVisible) {
     /* Show / Hide Label */
-    if (this->m_showLabel && (this->m_type.compare("##") != 0)) 
+    if (this->m_showLabel) 
       ImGui::Text(this->m_name.c_str());
 
     /* Handle max length */
