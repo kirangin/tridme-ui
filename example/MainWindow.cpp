@@ -12,8 +12,7 @@ MainWindow::~MainWindow() { }
 void MainWindow::onInit() { 
   this->setEnableDockspace(true);
 
-  // m_modalOpen = new Modal(this);
-  m_modalOpen = new Modal();
+  m_modalOpen = new ModalDialog(*this);
 
   m_menuBar = new MenuBar();
   m_openFile = new Button("Open File");
@@ -21,7 +20,9 @@ void MainWindow::onInit() {
   Menu* menuEdit = new Menu("Edit");
 
   menuFile->addItem("New", "CTRL+N", "new");
-  menuFile->addAction("new", [this] { std::cout << "New file" << std::endl; });
+  menuFile->addAction("new", [this] {
+    this->m_modalOpen->show();
+  });
   menuFile->addItem("Open", "CTRL+O", "open");
   menuFile->addAction("open", [this] { 
     onOpenFileClicked();
@@ -55,21 +56,22 @@ void MainWindow::onInit() {
   m_password->setPlaceholderText("********");
   m_password->hideCharacter(true);
 
-  // m_reason = new TextEdit("Reason");
-  // m_reason->setPlaceholderText("Reason for joining");
+  m_reason = new TextEdit("Reason");
+  m_reason->setPlaceholderText("Reason for joining");
 
   // m_buttonPlay = new Button("Play");
 
   HBoxLayout* hboxRow1 = new HBoxLayout();
-  // HBoxLayout* hboxRow2 = new HBoxLayout();
+  HBoxLayout* hboxRow2 = new HBoxLayout();
   // HBoxLayout* hboxRow3 = new HBoxLayout();
   VBoxLayout* vbox = new VBoxLayout();
 
   vbox->addComponent(m_username);
   vbox->addComponent(m_password);
-  // hboxRow2->addComponent(m_reason);
+  hboxRow2->addComponent(m_reason);
   // hboxRow3->addComponent(m_buttonPlay);
 
+  m_modalOpen->addLayout(hboxRow2);
   hboxRow1->addLayout(vbox);
 
 
