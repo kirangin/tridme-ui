@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <iostream>
 #include <vector>
+#include <stack>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <imgui.h>
@@ -13,6 +14,7 @@
 #include <misc/cpp/imgui_stdlib.h>
 #include <components/Layout.hpp>
 #include <components/MenuBar.hpp>
+#include <components/Modal.hpp>
 using namespace Tridme;
 using namespace Tridme::UI;
 
@@ -50,6 +52,7 @@ namespace Tridme {
       bool m_windowOpened = true;
       std::unordered_map<std::string, Storage::Vector<std::string>> m_componentIds;
       MenuBar* m_menuBar = nullptr;
+      std::stack<Modal> m_stackedModal;
 
       /* ImGui dan Dockingnya */
       bool m_optFullscreen = true;

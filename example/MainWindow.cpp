@@ -12,13 +12,20 @@ MainWindow::~MainWindow() { }
 void MainWindow::onInit() { 
   this->setEnableDockspace(true);
 
+  // m_modalOpen = new Modal(this);
+  m_modalOpen = new Modal();
+
   m_menuBar = new MenuBar();
+  m_openFile = new Button("Open File");
   Menu* menuFile = new Menu("File");
   Menu* menuEdit = new Menu("Edit");
 
   menuFile->addItem("New", "CTRL+N", "new");
   menuFile->addAction("new", [this] { std::cout << "New file" << std::endl; });
   menuFile->addItem("Open", "CTRL+O", "open");
+  menuFile->addAction("open", [this] { 
+    onOpenFileClicked();
+   });
   menuFile->addItem("Save", "CTRL+S", "save");
   menuFile->addItem("Save As", "CTRL+SHIFT+S", "saveas");
   menuFile->addItem("Exit", "CTRL+Q", "exit");
@@ -36,6 +43,9 @@ void MainWindow::onInit() {
 
   // ImGuiIO& io = ImGui::GetIO();
   // m_poppins24 = io.Fonts->AddFontFromFileTTF("./deps/fonts/Poppins/Poppins-Regular.ttf", 32.0f);
+
+
+  // m_stackedModal->addModal()
 
   m_username = new LineEdit("Nama");
   m_username->setPlaceholderText("johndoe");
@@ -61,6 +71,10 @@ void MainWindow::onInit() {
   // hboxRow3->addComponent(m_buttonPlay);
 
   hboxRow1->addLayout(vbox);
+
+
+  // modal
+  // hboxRow1->addLayout(m);
   // vbox->addLayout(hboxRow2);
   // vbox->addLayout(hboxRow3);
 
@@ -110,4 +124,8 @@ void MainWindow::onPasswordEntered() {
   } else {
     m_text->setText("Password is valid");
   }
+}
+
+void MainWindow::onOpenFileClicked() {
+  ImGui::OpenPopup("Delete?");
 }

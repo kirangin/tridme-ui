@@ -9,6 +9,7 @@
 #include <components/HBoxLayout.hpp>
 #include <components/VBoxLayout.hpp>
 #include <components/MenuBar.hpp>
+#include <components/Modal.hpp>
 using namespace Tridme;
 using namespace Tridme::UI;
 
@@ -33,16 +34,21 @@ class MainWindow : public BaseWindow {
     void onUsernameEntered();
     void onPasswordEntered();
 
+    void onOpenFileClicked();
+
   private:
     bool m_myToolActive = false;
+    bool m_showOpen = false;
 
     ImFont*   m_poppins24;
     Button*   m_buttonPlay;
+    Button*   m_openFile;
     Text*     m_text;
     LineEdit* m_username;
     LineEdit* m_password;
     TextEdit* m_reason;
     MenuBar*  m_menuBar;
+    Modal*    m_modalOpen;
 };
 
 #endif

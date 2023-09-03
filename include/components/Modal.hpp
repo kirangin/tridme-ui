@@ -1,26 +1,22 @@
-#ifndef VBoxLayout_HPP
-#define VBoxLayout_HPP
+#ifndef MODAL_HPP
+#define MODAL_HPP
 #include <components/Layout.hpp>
-#include <components/Object.hpp>
-#include <storage/Vector.hpp>
-
-/*
- * Hbox adalah layout yang item-itemnya berjajar secara horizontal, 
- * seperti kolom.
- */
 
 namespace Tridme {
   namespace UI {
-    class VBoxLayout : public Layout {
+    class Modal : public Layout {
       public:
-        VBoxLayout();
-        ~VBoxLayout();
+        Modal();
+        // Modal(BaseWindow* window);
+        ~Modal();
 
         void addComponent(Object* obj);
         void addLayout(Layout* layout);
         void removeComponent(Object* obj);
         void render();
         void setId(std::string id);
+        void show();
+        void hide();
 
         virtual std::string getType() const {
           return this->m_type;
@@ -31,11 +27,12 @@ namespace Tridme {
         Vector<Layout*> m_layouts;
         int             m_totalWidth;
         int             m_totalChild = 0;
-        std::string     m_type = "VBoxLayout";
+        std::string     m_type = "Modal";
+        bool            m_isOpen = false;
         
         std::unordered_map<std::string, Storage::Vector<std::string>> m_componentIds;
     };
-  };
-};
+  }
+}
 
 #endif
