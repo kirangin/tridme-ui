@@ -89,6 +89,11 @@ void BaseWindow::renderWidgets() {
         ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), m_dockspaceFlags);
       }
 
+      /* Render popups */
+      for (auto popup : m_stackedModalDialog) {
+        popup->render();
+      }      
+
       ImGui::Begin("MainWindow", &m_windowOpened);
       if (m_layout != nullptr)
         m_layout->render();
@@ -250,4 +255,8 @@ void BaseWindow::setLayout(Layout* layout) {
 
 void BaseWindow::setMenuBar(MenuBar* menuBar) {
   this->m_menuBar = menuBar;
+}
+
+void BaseWindow::addModal(ModalDialog* modal) {
+  this->m_stackedModalDialog.pushBack(modal);
 }

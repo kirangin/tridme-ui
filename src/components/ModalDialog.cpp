@@ -1,16 +1,21 @@
-#include <components/Modal.hpp>
+#include <components/ModalDialog.hpp>
+#include <core/BaseWindow.hpp>
 using namespace Tridme;
 using namespace Tridme::UI;
 
-Modal::Modal() {
+ModalDialog::ModalDialog(BaseWindow& parent) {
+  int id = parent.getDialogCounter() + 1;
+  this->m_id = id;
+
+  parent.increaseDialogCounter();
+  parent.addModal(this);
+}
+
+ModalDialog::~ModalDialog() {
 
 }
 
-Modal::~Modal() {
-
-}
-
-void Modal::addComponent(Object* obj) {
+void ModalDialog::addComponent(Object* obj) {
   std::string type = obj->getType(); 
   std::string id   = "##" + type + "_";
 
@@ -28,15 +33,15 @@ void Modal::addComponent(Object* obj) {
   m_totalChild += 1;
 }
 
-void Modal::addLayout(Layout* layout) {
+void ModalDialog::addLayout(Layout* layout) {
   this->m_layouts.pushBack(layout);
 }
 
-void Modal::removeComponent(Object* obj) {
+void ModalDialog::removeComponent(Object* obj) {
 
 }
 
-void Modal::render() {
+void ModalDialog::render() {
   if (this->m_isOpen) {
     ImGui::OpenPopup(this->m_id.c_str());
     this->m_isOpen = false;
@@ -46,7 +51,9 @@ void Modal::render() {
   ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
 
   if (ImGui::BeginPopupModal(this->m_id.c_str(), NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
-    ImGui::Text("This is a modal dialog from the class!");
+    for (auto layout : m_layouts) {
+      layout->render();
+    }
 
     if (ImGui::Button("OK")) {
       ImGui::CloseCurrentPopup();
@@ -56,14 +63,14 @@ void Modal::render() {
   }
 }
 
-void Modal::setId(std::string id) {
+void ModalDialog::setId(std::string id) {
   this->m_id = id;
 }
 
-void Modal::show() {
+void ModalDialog::show() {
   this->m_isOpen = true;
 }
 
-void Modal::hide() {
+void ModalDialog::hide() {
   this->m_isOpen = false;
 }

@@ -18,7 +18,7 @@ add_library(
   components/VBoxLayout.cpp
   components/MenuBar.cpp
   components/Menu.cpp
-  components/Modal.cpp
+  components/ModalDialog.cpp
 )
 
 target_include_directories(

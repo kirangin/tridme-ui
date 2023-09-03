@@ -14,9 +14,10 @@
 #include <misc/cpp/imgui_stdlib.h>
 #include <components/Layout.hpp>
 #include <components/MenuBar.hpp>
-#include <components/Modal.hpp>
+#include <components/ModalDialog.hpp>
 using namespace Tridme;
 using namespace Tridme::UI;
+using namespace Tridme::Storage;
 
 namespace Tridme {
   class BaseWindow {
@@ -38,21 +39,26 @@ namespace Tridme {
       void theme();
       void setEnableDockspace(bool enable);
       void addComponent(Object* obj);
+      void addModal(ModalDialog* modal);
       void setMenuBar(MenuBar* menuBar);
       void setLayout(Layout* layout);
+
+      inline int getDialogCounter() { return this->m_dialogCounter; }
+      inline void increaseDialogCounter() { this->m_dialogCounter += 1; }
 
     private:
       std::string m_title;
       int         m_width;
       int         m_height;
+      int         m_dialogCounter = 0;
       Layout*     m_layout = nullptr;
       GLFWwindow* m_window;
 
       bool m_dockspaceEnabled = false;
       bool m_windowOpened = true;
-      std::unordered_map<std::string, Storage::Vector<std::string>> m_componentIds;
+      std::unordered_map<std::string, Vector<std::string>> m_componentIds;
       MenuBar* m_menuBar = nullptr;
-      std::stack<Modal> m_stackedModal;
+      Vector<ModalDialog*> m_stackedModalDialog;
 
       /* ImGui dan Dockingnya */
       bool m_optFullscreen = true;
