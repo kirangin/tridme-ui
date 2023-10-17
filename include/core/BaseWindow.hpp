@@ -40,8 +40,9 @@ namespace Tridme {
       void setEnableDockspace(bool enable);
       void addComponent(Object* obj);
       void addModal(ModalDialog* modal);
-      void setMenuBar(MenuBar* menuBar);
       void setLayout(Layout* layout);
+
+      MenuBar* menuBar();
 
       inline int getDialogCounter() { return this->m_dialogCounter; }
       inline void increaseDialogCounter() { this->m_dialogCounter += 1; }

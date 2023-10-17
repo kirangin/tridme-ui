@@ -41,6 +41,9 @@ void BaseWindow::init() {
 
   ImGui_ImplGlfw_InitForOpenGL(m_window, true);
   ImGui_ImplOpenGL3_Init("#version 330");
+
+  /* Initialize Menu Bar */
+  this->m_menuBar = new MenuBar();  
 }
 
 void BaseWindow::update() {
@@ -106,9 +109,15 @@ void BaseWindow::renderWidgets() {
     ImGui::End();
   } else {
     m_windowFlags  = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-    m_windowFlags |= ImGuiWindowFlags_AlwaysVerticalScrollbar;
+    m_windowFlags |= ImGuiWindowFlags_AlwaysVerticalScrollbar | ImGuiWindowFlags_MenuBar;
 
     ImGui::Begin("MainWindow", &m_windowOpened, m_windowFlags);
+    
+    /* Draw Menu Bar */
+    if (m_menuBar != nullptr && m_menuBar->getMenuCount() > 0) {
+      m_menuBar->render();
+    }
+    
     m_layout->render();
     ImGui::End();
   }
@@ -253,10 +262,10 @@ void BaseWindow::setLayout(Layout* layout) {
   this->m_layout = layout;
 }
 
-void BaseWindow::setMenuBar(MenuBar* menuBar) {
-  this->m_menuBar = menuBar;
-}
-
 void BaseWindow::addModal(ModalDialog* modal) {
   this->m_stackedModalDialog.pushBack(modal);
+}
+
+MenuBar* BaseWindow::menuBar() {
+  return this->m_menuBar;
 }

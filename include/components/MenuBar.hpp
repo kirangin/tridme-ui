@@ -13,6 +13,7 @@ namespace Tridme {
         ~MenuBar();
 
         void addMenu(Menu* menu);
+        int getMenuCount();
         
         virtual void render();
         virtual std::string getType() const {
