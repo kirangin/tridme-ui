@@ -25,6 +25,9 @@ class MainWindow : public BaseWindow {
     void onUpdate(float dt) override;
     void onDestroy() override;
 
+    void createMenu();
+    void onNewFile();
+
     /* Modes */
     void modeBasic();
     void modeAdvanced();

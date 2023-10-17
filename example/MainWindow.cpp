@@ -10,35 +10,9 @@ MainWindow::MainWindow(std::string title, int width, int height)
 MainWindow::~MainWindow() { }
 
 void MainWindow::onInit() { 
-  // this->setEnableDockspace(fa);
   m_modalOpen = new ModalDialog(*this);
-
   m_openFile = new Button("Open File");
-  Menu* menuFile = new Menu("File");
-  menuBar()->addMenu(menuFile);
-  Menu* menuEdit = new Menu("Edit");
-  menuBar()->addMenu(menuEdit);
-
-  menuFile->addItem("New", "CTRL+N", "new");
-  menuFile->addAction("new", [this] {
-    this->m_modalOpen->show();
-  });
-  menuFile->addItem("Open", "CTRL+O", "open");
-  menuFile->addAction("open", [this] { 
-    onOpenFileClicked();
-   });
-  menuFile->addItem("Save", "CTRL+S", "save");
-  menuFile->addItem("Save As", "CTRL+SHIFT+S", "saveas");
-  menuFile->addItem("Exit", "CTRL+Q", "exit");
-
-  menuEdit->addItem("Undo", "CTRL+Z", "undo");
-  menuEdit->addItem("Redo", "CTRL+Y", "redo");
-  menuEdit->addItem("Cut", "CTRL+X", "cut");
-  menuEdit->addItem("Copy", "CTRL+C", "copy");
-  menuEdit->addItem("Paste", "CTRL+V", "paste");
-  menuEdit->addItem("Delete", "DEL", "delete");
-  menuEdit->addItem("Select All", "CTRL+A", "selectall");
-
+ 
   m_username = new LineEdit("Nama");
   m_username->setPlaceholderText("johndoe");
   m_username->setMaxLength(8);
@@ -62,6 +36,7 @@ void MainWindow::onInit() {
   hboxRow1->addLayout(vbox);
 
   setLayout(hboxRow1);
+  createMenu();
 }
 
 void MainWindow::onUpdate(float dt) {
@@ -108,4 +83,32 @@ void MainWindow::onPasswordEntered() {
 
 void MainWindow::onOpenFileClicked() {
   ImGui::OpenPopup("Delete?");
+}
+
+void MainWindow::createMenu() {
+  Menu* menuFile = new Menu("File");
+  menuBar()->addMenu(menuFile);
+  Menu* menuEdit = new Menu("Edit");
+  menuBar()->addMenu(menuEdit);
+
+  menuFile->addItem("New", "CTRL+N", "new");
+  menuFile->addItem("Open", "CTRL+O", "open");
+  menuFile->addAction("open", [this] { 
+    onNewFile();
+  });
+  menuFile->addItem("Save", "CTRL+S", "save");
+  menuFile->addItem("Save As", "CTRL+SHIFT+S", "saveas");
+  menuFile->addItem("Exit", "CTRL+Q", "exit");
+
+  menuEdit->addItem("Undo", "CTRL+Z", "undo");
+  menuEdit->addItem("Redo", "CTRL+Y", "redo");
+  menuEdit->addItem("Cut", "CTRL+X", "cut");
+  menuEdit->addItem("Copy", "CTRL+C", "copy");
+  menuEdit->addItem("Paste", "CTRL+V", "paste");
+  menuEdit->addItem("Delete", "DEL", "delete");
+  menuEdit->addItem("Select All", "CTRL+A", "selectall");
+}
+
+void MainWindow::onNewFile() {
+  std::cout << "Imagine there's no heaven" << std::endl;
 }
