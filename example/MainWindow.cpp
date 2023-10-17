@@ -10,14 +10,14 @@ MainWindow::MainWindow(std::string title, int width, int height)
 MainWindow::~MainWindow() { }
 
 void MainWindow::onInit() { 
-  this->setEnableDockspace(true);
-
+  // this->setEnableDockspace(fa);
   m_modalOpen = new ModalDialog(*this);
 
-  m_menuBar = new MenuBar();
   m_openFile = new Button("Open File");
   Menu* menuFile = new Menu("File");
+  menuBar()->addMenu(menuFile);
   Menu* menuEdit = new Menu("Edit");
+  menuBar()->addMenu(menuEdit);
 
   menuFile->addItem("New", "CTRL+N", "new");
   menuFile->addAction("new", [this] {
@@ -39,15 +39,6 @@ void MainWindow::onInit() {
   menuEdit->addItem("Delete", "DEL", "delete");
   menuEdit->addItem("Select All", "CTRL+A", "selectall");
 
-  m_menuBar->addMenu(menuFile);
-  m_menuBar->addMenu(menuEdit);
-
-  // ImGuiIO& io = ImGui::GetIO();
-  // m_poppins24 = io.Fonts->AddFontFromFileTTF("./deps/fonts/Poppins/Poppins-Regular.ttf", 32.0f);
-
-
-  // m_stackedModal->addModal()
-
   m_username = new LineEdit("Nama");
   m_username->setPlaceholderText("johndoe");
   m_username->setMaxLength(8);
@@ -59,36 +50,23 @@ void MainWindow::onInit() {
   m_reason = new TextEdit("Reason");
   m_reason->setPlaceholderText("Reason for joining");
 
-  // m_buttonPlay = new Button("Play");
-
   HBoxLayout* hboxRow1 = new HBoxLayout();
   HBoxLayout* hboxRow2 = new HBoxLayout();
-  // HBoxLayout* hboxRow3 = new HBoxLayout();
   VBoxLayout* vbox = new VBoxLayout();
 
   vbox->addComponent(m_username);
   vbox->addComponent(m_password);
   hboxRow2->addComponent(m_reason);
-  // hboxRow3->addComponent(m_buttonPlay);
 
   m_modalOpen->addLayout(hboxRow2);
   hboxRow1->addLayout(vbox);
 
-
-  // modal
-  // hboxRow1->addLayout(m);
-  // vbox->addLayout(hboxRow2);
-  // vbox->addLayout(hboxRow3);
-
-  // m_username->onEnterPressed.connect([this] { onUsernameEntered(); });
-  // m_password->onEnterPressed.connect([this] { onPasswordEntered(); });
   setLayout(hboxRow1);
-  setMenuBar(m_menuBar);
 }
 
 void MainWindow::onUpdate(float dt) {
-  bool active = true;
-  ImGui::ShowDemoWindow(&active);
+  // bool active = true;
+  // ImGui::ShowDemoWindow(&active);
 }
 
 void MainWindow::onDestroy() {
