@@ -109,7 +109,7 @@ void BaseWindow::renderWidgets() {
     ImGui::End();
   } else {
     m_windowFlags  = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-    m_windowFlags |= ImGuiWindowFlags_AlwaysVerticalScrollbar | ImGuiWindowFlags_MenuBar;
+    m_windowFlags |= ImGuiWindowFlags_AlwaysVerticalScrollbar;
 
     ImGui::Begin("MainWindow", &m_windowOpened, m_windowFlags);
     
