@@ -84,4 +84,8 @@ template <typename T> int Vector<T>::getSize() const {
   return this->size;
 }
 
+template <typename T> T Vector<T>::operator[](int index) {
+  return this->data[index];
+}
+
 #endif

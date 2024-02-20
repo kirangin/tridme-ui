@@ -61,6 +61,8 @@ namespace Tridme {
         */
         void clear();
 
+        T operator[](int index);
+
         /* 
          * Iterator (supaya bisa range-based for loop). 
          * Untuk iterator implementasinya langsung di sini aja.
